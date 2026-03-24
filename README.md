@@ -50,41 +50,38 @@
 Want to run this project locally? Follow these steps:
 
 ### 1. Clone the repository
-```bash
+
 git clone [https://github.com/islamrakibul9274/exclusive-ecommerce.git](https://github.com/islamrakibul9274/exclusive-ecommerce.git)
 cd exclusive-ecommerce
 
 
 2. Set up the Backend
-Bash
 cd server
 npm install
-Create a .env file in the server directory and add your keys:
 
-Code snippet
+Create a .env file in the server directory and add your keys:
 PORT=5000
 MONGODB_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret_code
 STRIPE_SECRET_KEY=your_stripe_secret_key
-Start the backend server:
 
-Bash
+Start the backend server:
 npm start
+
 3. Set up the Frontend
 Open a new terminal window:
-
-Bash
 cd client
 npm install --legacy-peer-deps
+
 Navigate to client/src/pages/CheckOut.jsx and insert your Stripe Publishable Key:
-
-JavaScript
 const stripePromise = loadStripe('your_stripe_publishable_key');
-Start the frontend development server:
 
-Bash
+Start the frontend development server:
 npm run dev
+
+
 📈 Architecture & Deployment
+
 Monorepo Structure: Both client and server reside in a single repository for streamlined version control.
 
 Frontend Hosting: Deployed on Vercel with optimized build caching.
@@ -92,3 +89,4 @@ Frontend Hosting: Deployed on Vercel with optimized build caching.
 Backend Hosting: Deployed as a web service on Render, featuring automatic environment variable injection and secure port mapping.
 
 Built with ❤️ by Rakibul Islam Rumel
+
