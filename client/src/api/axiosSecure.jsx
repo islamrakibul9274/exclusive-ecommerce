@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosSecure = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: 'https://exclusive-api-028c.onrender.com',
 });
 
 // Intercept every outgoing request and attach the token automatically
