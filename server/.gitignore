@@ -1,0 +1,8 @@
+# Dependencies
+node_modules/
+
+# Environment Variables (Keep secrets safe!)
+.env
+
+# Mac system files
+.DS_Store

@@ -1,0 +1,20 @@
+FULL-PROJECT-2/
+├── client/                     # FRONTEND (React + Vite)
+│   ├── src/
+│   │   ├── api/                # axiosPublic.jsx & axiosSecure.jsx
+│   │   ├── assets/             # Static logos and placeholder images
+│   │   ├── components/         # Reusable UI (Navbar, Footer, ProductCard)
+│   │   ├── context/            # AuthContext.jsx, CartContext.jsx, WishlistContext.jsx
+│   │   ├── layouts/            # MainLayout.jsx (with Navbar/Footer)
+│   │   ├── pages/              # Home, ProductDetails, Cart, Checkout, Wishlist, Account, Login, NotFound
+│   │   └── routes/             # Router.jsx & ProtectedRoutes.jsx
+│   ├── index.css               # Tailwind v4 import
+│   └── package.json
+│
+└── server/                     # BACKEND (Node.js)
+    ├── middleware/             # NEW: verifyToken.js (For secure routes)
+    ├── models/                 # User.js, Product.js, Order.js
+    ├── routes/                 # userRoutes.js, productRoutes.js, orderRoutes.js
+    ├── .env                    # MongoDB URI, JWT Secret, ImgBB Key
+    ├── index.js                # The Express Engine
+    └── package.json
