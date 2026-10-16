@@ -2,6 +2,8 @@
 
 A full-stack Next.js storefront with a MongoDB catalog and one Vercel deployment. The previous Express source remains in `server/` for reference; the Next.js app calls its own `/api` routes and does not depend on Render.
 
+**Live deployment:** [exclusive-ecommerce-mu.vercel.app](https://exclusive-ecommerce-mu.vercel.app)
+
 ## Run locally
 
 Use Node.js 20.19 or newer. The Vercel project uses Node.js 24.
