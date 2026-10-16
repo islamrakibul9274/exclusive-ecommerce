@@ -4,7 +4,7 @@ A full-stack Next.js storefront with a MongoDB catalog and one Vercel deployment
 
 ## Run locally
 
-Use Node.js 20.9 or newer.
+Use Node.js 20.19 or newer. The Vercel project uses Node.js 24.
 
 ```sh
 cd client
