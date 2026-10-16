@@ -1,25 +1,24 @@
-import React from 'react';
-import { Navigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+"use client";
 
-const AdminRoute = ({ children }) => {
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "../context/AuthContext";
+
+export default function AdminRoute({ children }) {
   const { user, loading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!loading && user?.role !== "admin") router.replace("/");
+  }, [loading, router, user]);
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-red-500"></div>
+      <div className="flex h-screen items-center justify-center">
+        <div className="h-16 w-16 animate-spin rounded-full border-t-2 border-b-2 border-red-500" />
       </div>
     );
   }
 
-  // If there is a user AND their role is exactly 'admin', render the page
-  if (user && user.role === 'admin') {
-    return children;
-  }
-
-  // Otherwise, kick them back to the homepage silently
-  return <Navigate to="/" replace />;
-};
-
-export default AdminRoute;
+  return user?.role === "admin" ? children : null;
+}

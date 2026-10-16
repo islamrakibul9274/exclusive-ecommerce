@@ -1,125 +1,154 @@
-import React, { useState } from 'react';
-import { useCart } from '../context/CartContext';
-import { Link, useNavigate } from 'react-router-dom';
-import { FiSearch, FiHeart, FiShoppingCart, FiUser, FiShoppingBag, FiXCircle, FiStar, FiLogOut, FiGrid } from 'react-icons/fi';
-import { useAuth } from '../context/AuthContext';
-
-const Navbar = () => {
-    const { user, logout } = useAuth();
-    const navigate = useNavigate();
-    const [dropdownOpen, setDropdownOpen] = useState(false);
-    const { totalItems } = useCart();
-
-    const handleLogout = () => {
-        logout();
-        setDropdownOpen(false);
-        navigate('/login');
-    };
-
-    return (
-        <header className="w-full font-sans">
-            {/* Top Black Announcement Bar */}
-            <div className="bg-black text-white text-xs md:text-sm py-3 px-4 flex justify-between items-center">
-                <div className="hidden md:block w-1/6"></div>
-                <div className=" text-center flex items-center justify-center gap-2">
-                    <span>Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!</span>
-                    <a href="#" className="font-bold underline hover:text-gray-300">ShopNow</a>
-                </div>
-                <div className=" w-1/6 text-right pr-4 md:pr-12">
-                    <select className="bg-transparent text-white outline-none cursor-pointer text-sm">
-                        <option className="text-black">English</option>
-                    </select>
-                </div>
-            </div>
-
-            {/* Main White Navbar */}
-            <div className="border-b border-gray-200">
-                <div className="max-w-[1140px] mx-auto px-4 py-5 flex justify-between items-center mt-2">
-
-                    {/* Brand Logo */}
-                    <Link to="/" className="text-2xl font-bold tracking-wide text-black">
-                        Exclusive
-                    </Link>
-
-                    {/* Center Navigation Links */}
-                    <nav className="hidden lg:flex space-x-12 text-base font-medium text-black">
-                        <Link to="/" className="hover:underline underline-offset-4">Home</Link>
-                        <Link to="/contact" className="hover:underline underline-offset-4">Contact</Link>
-                        <Link to="/about" className="hover:underline underline-offset-4">About</Link>
-                        {/* Hide Sign Up if logged in */}
-                        {!user && <Link to="/signup" className="hover:underline underline-offset-4">Sign Up</Link>}
-                    </nav>
-
-                    {/* Right Side: Search & Icons */}
-                    <div className="flex items-center space-x-6 relative">
-
-                        <div className="hidden md:flex items-center bg-[#F5F5F5] rounded-md px-4 py-2">
-                            <input type="text" placeholder="What are you looking for?" className="bg-transparent outline-none text-xs w-48 placeholder-gray-500" />
-                            <FiSearch className="text-lg text-black cursor-pointer" />
-                        </div>
-
-                        <div className="flex items-center space-x-5">
-                            <Link to="/wishlist" className="relative hover:text-red-500 transition-colors">
-                                <FiHeart className="text-2xl text-black hover:text-red-500" />
-                            </Link>
-
-                            {/* ✅ FIX 3: Re-added the dynamic cart badge */}
-                            <Link to="/cart" className="relative hover:text-red-500 transition-colors">
-                                <FiShoppingCart className="text-2xl text-black hover:text-red-500" />
-                                {totalItems > 0 && (
-                                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">
-                                        {totalItems}
-                                    </span>
-                                )}
-                            </Link>
-
-                            {/* USER DROPDOWN LOGIC */}
-                            {user ? (
-                                <div className="relative">
-                                    <div
-                                        onClick={() => setDropdownOpen(!dropdownOpen)}
-                                        className={`p-1.5 rounded-full cursor-pointer transition-colors ${dropdownOpen ? 'bg-red-500 text-white' : 'bg-transparent text-black hover:bg-red-500 hover:text-white'}`}
-                                    >
-                                        <FiUser className="text-2xl" />
-                                    </div>
-
-                                    {/* Dropdown Menu */}
-                                    {dropdownOpen && (
-                                        <div className="absolute right-0 mt-3 w-56 bg-black/90 backdrop-blur-md text-white rounded-md shadow-2xl py-3 px-4 z-50 flex flex-col gap-3 text-sm">
-
-                                            {/* 👑 NEW: The Admin Only Link */}
-                                            {user.role === 'admin' && (
-                                                <Link to="/admin" onClick={() => setDropdownOpen(false)} className="flex items-center gap-3 text-red-400 hover:text-red-300 transition-colors pb-2 border-b border-gray-700">
-                                                    <FiGrid className="text-lg" /> Admin Dashboard
-                                                </Link>
-                                            )}
-
-                                            <Link to="/account" onClick={() => setDropdownOpen(false)} className="flex items-center gap-3 hover:text-gray-300 transition-colors">
-                                                <FiUser className="text-lg" /> Manage My Account
-                                            </Link>
-                                            <Link to="/account" onClick={() => setDropdownOpen(false)} className="flex items-center gap-3 hover:text-gray-300 transition-colors">
-                                                <FiShoppingBag className="text-lg" /> My Order
-                                            </Link>
-                                            <Link to="/account" onClick={() => setDropdownOpen(false)} className="flex items-center gap-3 hover:text-gray-300 transition-colors">
-                                                <FiXCircle className="text-lg" /> My Cancellations
-                                            </Link>
-                                            <Link to="/account" onClick={() => setDropdownOpen(false)} className="flex items-center gap-3 hover:text-gray-300 transition-colors">
-                                                <FiStar className="text-lg" /> My Reviews
-                                            </Link>
-                                            <button onClick={handleLogout} className="flex items-center gap-3 hover:text-gray-300 transition-colors text-left">
-                                                <FiLogOut className="text-lg" /> Logout
-                                            </button>
-                                        </div>
-                                    )}
-                                </div>
-                            ) : null}
-
-                        </div>
-                    </div>
-                </div>
-            </div> {/* ✅ FIX 2: Added missing closing div for the border-b container */}
-        </header>
+"use client";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
+import {
+  FiArrowUpRight,
+  FiSearch,
+  FiHeart,
+  FiShoppingBag,
+  FiUser,
+  FiMenu,
+  FiX,
+  FiArrowRight,
+} from "react-icons/fi";
+import { useCart } from "../context/CartContext";
+import { useAuth } from "../context/AuthContext";
+export default function Navbar() {
+  const { totalItems, wishlist } = useCart(),
+    { user } = useAuth(),
+    path = usePathname(),
+    router = useRouter();
+  const [menu, setMenu] = useState(false),
+    [query, setQuery] = useState("");
+  function search(e) {
+    e.preventDefault();
+    setMenu(false);
+    router.push(
+      `/shop${query.trim() ? `?q=${encodeURIComponent(query.trim())}` : ""}`,
     );
-};
-
-export default Navbar;
+  }
+  const links = [
+    ["Discover", "/"],
+    ["Shop all", "/shop"],
+    ["Our story", "/about"],
+    ["Get in touch", "/contact"],
+  ];
+  return (
+    <>
+      <div className="announcement">
+        <p>
+          A little welcome, on us. <span>10% off with WELCOME10</span>
+        </p>
+        <Link href="/shop">
+          Find your next favorite <FiArrowUpRight />
+        </Link>
+      </div>
+      <header
+        className="site-header"
+        onClick={(event) => {
+          if (event.target.closest("a")) setMenu(false);
+        }}
+      >
+        <div className="container nav-main">
+          <Link className="logo" href="/" aria-label="Exclusive home">
+            exclusive<span>✳</span>
+          </Link>
+          <nav className="desktop-nav" aria-label="Main navigation">
+            {links.map(([label, href]) => (
+              <Link
+                key={href}
+                className={path === href ? "active" : ""}
+                href={href}
+              >
+                {label}
+              </Link>
+            ))}
+          </nav>
+          <div className="nav-actions">
+            <form className="nav-search" onSubmit={search}>
+              <input
+                aria-label="Search the collection"
+                placeholder="Find something good…"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+              />
+              <button aria-label="Search">
+                <FiSearch />
+              </button>
+            </form>
+            <Link
+              className="icon-button desktop-account"
+              href={user ? "/account" : "/login"}
+              aria-label={user ? "Your account" : "Sign in"}
+            >
+              <FiUser />
+            </Link>
+            <Link
+              className="icon-button"
+              href="/wishlist"
+              aria-label={`Wishlist, ${wishlist.length} items`}
+            >
+              <FiHeart />
+              {wishlist.length > 0 && (
+                <span className="badge">{wishlist.length}</span>
+              )}
+            </Link>
+            <Link
+              className="icon-button"
+              href="/cart"
+              aria-label={`Shopping bag, ${totalItems} items`}
+            >
+              <FiShoppingBag />
+              {totalItems > 0 && <span className="badge">{totalItems}</span>}
+            </Link>
+            <button
+              className="icon-button mobile-menu-button"
+              aria-label={menu ? "Close menu" : "Open menu"}
+              aria-expanded={menu}
+              onClick={() => setMenu(!menu)}
+            >
+              {menu ? <FiX /> : <FiMenu />}
+            </button>
+          </div>
+        </div>
+        {menu && (
+          <div className="mobile-menu">
+            <form className="mobile-search" onSubmit={search}>
+              <FiSearch />
+              <input
+                aria-label="Search"
+                placeholder="What are you looking for?"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+              />
+              <button aria-label="Submit search">
+                <FiArrowRight />
+              </button>
+            </form>
+            <nav>
+              {links.map(([label, href]) => (
+                <Link href={href} key={href}>
+                  {label}
+                  <FiArrowUpRight />
+                </Link>
+              ))}
+              <Link href={user ? "/account" : "/login"}>
+                {user
+                  ? `Hello, ${user.name.split(" ")[0]}`
+                  : "Sign in / create account"}
+                <FiUser />
+              </Link>
+              {user?.role === "admin" && (
+                <Link href="/admin">
+                  Store management
+                  <FiArrowUpRight />
+                </Link>
+              )}
+            </nav>
+          </div>
+        )}
+      </header>
+    </>
+  );
+}

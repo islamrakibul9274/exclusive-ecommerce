@@ -1,88 +1,120 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { FiSend } from 'react-icons/fi';
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
-
-const Footer = () => {
+"use client";
+import Link from "next/link";
+import { useState } from "react";
+import { FiArrowRight, FiCheck, FiArrowUpRight } from "react-icons/fi";
+import toast from "react-hot-toast";
+export default function Footer() {
+  const [email, setEmail] = useState(""),
+    [busy, setBusy] = useState(false),
+    [done, setDone] = useState(false);
+  async function subscribe(e) {
+    e.preventDefault();
+    setBusy(true);
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message);
+      setDone(true);
+      toast.success(data.message);
+    } catch (e) {
+      toast.error(e.message);
+    } finally {
+      setBusy(false);
+    }
+  }
   return (
-    <footer className="bg-black text-white pt-20 pb-6 font-sans mt-20">
-      <div className="max-w-[1140px] mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-16">
-        
-        {/* Column 1 */}
-        <div className="flex flex-col gap-4">
-          <h2 className="text-2xl font-bold tracking-wide">Exclusive</h2>
-          <h3 className="text-lg font-medium mt-2">Subscribe</h3>
-          <p className="text-sm font-light text-gray-200">Get 10% off your first order</p>
-          <div className="relative mt-2 border border-white rounded w-full max-w-[250px]">
-            <input 
-              type="email" 
-              placeholder="Enter your email" 
-              className="bg-transparent text-sm p-3 w-full outline-none placeholder-gray-400"
-            />
-            <button className="absolute right-3 top-1/2 -translate-y-1/2 hover:text-gray-300">
-              <FiSend className="text-xl" />
-            </button>
+    <footer className="footer">
+      <div className="container">
+        <div className="newsletter">
+          <div>
+            <span className="eyebrow">Good things, occasionally.</span>
+            <h2>
+              Your next favorite.
+              <br />
+              <em>In your inbox.</em>
+            </h2>
+          </div>
+          <div>
+            <p>
+              New finds, considered collections, and a little inspiration.
+              <br />
+              Join the Exclusive edit.
+            </p>
+            <form onSubmit={subscribe}>
+              <input
+                type="email"
+                aria-label="Email for newsletter"
+                placeholder="Your email address"
+                required
+                value={email}
+                disabled={done}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <button
+                disabled={busy || done}
+                aria-label="Subscribe to newsletter"
+              >
+                {done ? <FiCheck /> : <FiArrowRight />}
+              </button>
+            </form>
+            <small>
+              {done
+                ? "You’re on the list. Welcome to the club."
+                : "By subscribing, you agree to our privacy policy."}
+            </small>
           </div>
         </div>
-
-        {/* Column 2 */}
-        <div className="flex flex-col gap-4">
-          <h3 className="text-lg font-medium">Support</h3>
-          <p className="text-sm font-light text-gray-200 leading-relaxed max-w-[200px]">
-            111 Bijoy sarani, Dhaka, <br /> DH 1515, Bangladesh.
-          </p>
-          <p className="text-sm font-light text-gray-200">exclusive@gmail.com</p>
-          <p className="text-sm font-light text-gray-200">+88015-88888-9999</p>
-        </div>
-
-        {/* Column 3 */}
-        <div className="flex flex-col gap-4">
-          <h3 className="text-lg font-medium">Account</h3>
-          <Link to="/account" className="text-sm font-light text-gray-200 hover:underline">My Account</Link>
-          <Link to="/login" className="text-sm font-light text-gray-200 hover:underline">Login / Register</Link>
-          <Link to="/cart" className="text-sm font-light text-gray-200 hover:underline">Cart</Link>
-          <Link to="/wishlist" className="text-sm font-light text-gray-200 hover:underline">Wishlist</Link>
-          <Link to="/" className="text-sm font-light text-gray-200 hover:underline">Shop</Link>
-        </div>
-
-        {/* Column 4 */}
-        <div className="flex flex-col gap-4">
-          <h3 className="text-lg font-medium">Quick Link</h3>
-          <Link to="/" className="text-sm font-light text-gray-200 hover:underline">Privacy Policy</Link>
-          <Link to="/" className="text-sm font-light text-gray-200 hover:underline">Terms Of Use</Link>
-          <Link to="/" className="text-sm font-light text-gray-200 hover:underline">FAQ</Link>
-          <Link to="/contact" className="text-sm font-light text-gray-200 hover:underline">Contact</Link>
-        </div>
-
-        {/* Column 5 */}
-        <div className="flex flex-col gap-4">
-          <h3 className="text-lg font-medium">Download App</h3>
-          <p className="text-xs font-medium text-gray-400">Save $3 with App New User Only</p>
-          <div className="flex items-center gap-2 mt-1">
-            <img src="/qr-code.png" alt="QR Code" className="w-20 h-20 object-cover bg-white p-1" />
-            <div className="flex flex-col gap-2">
-              <img src="/google-play.png" alt="Google Play" className="w-28 cursor-pointer hover:opacity-80" />
-              <img src="/app-store.png" alt="App Store" className="w-28 cursor-pointer hover:opacity-80" />
-            </div>
+        <div className="footer-links">
+          <div className="footer-brand">
+            <Link className="logo" href="/">
+              exclusive<span>✳</span>
+            </Link>
+            <p>
+              Considered finds. Everyday possibilities.
+              <br />A little more you.
+            </p>
           </div>
-          <div className="flex items-center gap-6 mt-4 text-xl">
-            <FaFacebookF className="cursor-pointer hover:text-gray-300" />
-            <FaTwitter className="cursor-pointer hover:text-gray-300" />
-            <FaInstagram className="cursor-pointer hover:text-gray-300" />
-            <FaLinkedinIn className="cursor-pointer hover:text-gray-300" />
+          <div>
+            <h3>Explore</h3>
+            <Link href="/shop">All products</Link>
+            <Link href="/shop?category=Gaming">Gaming</Link>
+            <Link href="/shop?category=Fashion">Fashion</Link>
+            <Link href="/shop?category=Home%20%26%20living">Home & living</Link>
+          </div>
+          <div>
+            <h3>Here to help</h3>
+            <Link href="/help">Shipping & returns</Link>
+            <Link href="/help#questions">Common questions</Link>
+            <Link href="/contact">Contact us</Link>
+            <Link href="/account?tab=orders">Track your order</Link>
+          </div>
+          <div>
+            <h3>Make yourself at home</h3>
+            <Link href="/about">Our story</Link>
+            <Link href="/account">Your account</Link>
+            <Link href="/wishlist">Your wishlist</Link>
+            <Link href="/credits">
+              Image credits <FiArrowUpRight />
+            </Link>
           </div>
         </div>
-
-      </div>
-
-      {/* Copyright */}
-      <div className="border-t border-gray-800 pt-6 text-center">
-        <p className="text-gray-500 text-sm flex items-center justify-center gap-2">
-          <span>&copy;</span> Copyright Rimel 2022. All right reserved
-        </p>
+        <div className="footer-bottom">
+          <span>
+            © {new Date().getFullYear()} Exclusive. All rights reserved.
+          </span>
+          <div>
+            <Link href="/policies">Privacy & terms</Link>
+            <span>USD $ · English</span>
+          </div>
+          <a href="#top" className="back-top">
+            Back to top ↑
+          </a>
+        </div>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}

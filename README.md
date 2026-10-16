@@ -1,92 +1,54 @@
-# 🛒 Exclusive - Full-Stack E-Commerce Platform
+# Exclusive
 
-![Exclusive E-Commerce Banner](https://via.placeholder.com/1200x400/000000/FFFFFF/?text=Exclusive+E-Commerce+Platform)
+A full-stack Next.js storefront with a MongoDB catalog and one Vercel deployment. The previous Express source remains in `server/` for reference; the Next.js app calls its own `/api` routes and does not depend on Render.
 
-**Exclusive** is a production-ready, full-stack MERN (MongoDB, Express, React, Node.js) e-commerce application. It features a complete shopping lifecycle, secure credit card processing via Stripe, role-based authentication, and a dedicated administrative dashboard for inventory and order management.
+## Run locally
 
-### 🔗 Live Links
-* **Live Application:** [Visit Exclusive E-Commerce](https://exclusive-ecommerce-mu.vercel.app/)
-* **Backend API:** Hosted on Render
+Use Node.js 20.9 or newer.
 
----
-
-## ✨ Key Features
-
-### 🛍️ Customer Experience
-* **Dynamic Shopping Cart:** Global state management for seamless adding, updating, and removing of products.
-* **Secure Checkout System:** Integrated with **Stripe** for simulated, secure credit card transactions, alongside a custom "Cash on Delivery" pipeline.
-* **Authentication:** JWT-based secure login and registration system.
-* **Responsive Design:** A mobile-first, highly responsive UI built with Tailwind CSS.
-
-### 🛡️ Admin Control Panel
-* **Role-Based Access Control (RBAC):** Protected routes ensuring only authorized users can access the dashboard.
-* **Order Management:** Real-time visibility into customer orders with the ability to dynamically update fulfillment statuses (Pending, Shipped, Delivered).
-* **Live Inventory Uploads:** Integrated with the **ImgBB API** allowing administrators to upload product images directly from their local machines to the cloud, automatically syncing the generated URLs to the MongoDB database.
-
----
-
-## 💻 Tech Stack
-
-**Frontend (Client)**
-* **React.js** (via Vite for optimized build speeds)
-* **Tailwind CSS** (for utility-first, responsive styling)
-* **React Router DOM** (for seamless SPA navigation)
-* **Stripe React Elements** (for secure UI payment inputs)
-
-**Backend (Server)**
-* **Node.js & Express.js** (RESTful API architecture)
-* **MongoDB & Mongoose** (NoSQL database and schema modeling)
-* **JSON Web Tokens (JWT)** (for stateless, secure authentication)
-* **Stripe Node API** (for backend payment intents)
-
-**Third-Party Integrations**
-* **Stripe API:** Payment processing
-* **ImgBB API:** Cloud image hosting
-
----
-
-## 🚀 Installation & Local Development
-
-Want to run this project locally? Follow these steps:
-
-### 1. Clone the repository
-
-git clone [https://github.com/islamrakibul9274/exclusive-ecommerce.git](https://github.com/islamrakibul9274/exclusive-ecommerce.git)
-cd exclusive-ecommerce
-
-
-2. Set up the Backend
-cd server
-npm install
-
-Create a .env file in the server directory and add your keys:
-PORT=5000
-MONGODB_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret_code
-STRIPE_SECRET_KEY=your_stripe_secret_key
-
-Start the backend server:
-npm start
-
-3. Set up the Frontend
-Open a new terminal window:
+```sh
 cd client
-npm install --legacy-peer-deps
-
-Navigate to client/src/pages/CheckOut.jsx and insert your Stripe Publishable Key:
-const stripePromise = loadStripe('your_stripe_publishable_key');
-
-Start the frontend development server:
+npm ci
+cp .env.example .env.local
 npm run dev
+```
 
+Set `MONGODB_URI`, `JWT_SECRET`, `STRIPE_SECRET_KEY`, `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, and `CLOUDINARY_API_SECRET`. Keep `.env.local` out of Git. Include the database name in the MongoDB URI. The existing catalog is used directly; no seeding is required.
 
-📈 Architecture & Deployment
+## Storefront
 
-Monorepo Structure: Both client and server reside in a single repository for streamlined version control.
+- Responsive shopping experience with a real catalog, search, category/price/stock filters, sorting, and product quick look.
+- Persistent browser wishlist, shopping bag, recently viewed items, and offer codes.
+- Server-calculated checkout totals, stock validation, cash on delivery, and Stripe card checkout. Test-mode keys are identified in checkout.
+- Account profiles, saved delivery addresses, password changes, order history, receipts, and eligible pending-order cancellations.
+- Admin inventory creation/editing/archiving, Cloudinary image uploads, order progression, and a customer-support inbox.
+- Contact messages and newsletter subscriptions are saved in MongoDB. These forms do not send email automatically. Admin replies open the administrator’s email app.
 
-Frontend Hosting: Deployed on Vercel with optimized build caching.
+Orders use database prices and reserve stock atomically. Paid orders require a matching verified Stripe payment. A repeated payment reference returns the existing order rather than creating another one. Cancelling an eligible cash order restores its stock; paid-order refunds are handled separately through support.
 
-Backend Hosting: Deployed as a web service on Render, featuring automatic environment variable injection and secure port mapping.
+The welcome code is `WELCOME10`: 10% off the product subtotal, capped at $50. Shipping is $9 or free when the pre-discount subtotal is at least $150. These rules are shared by the bag and server checkout.
 
-Built with ❤️ by Rakibul Islam Rumel
+## Images and fonts
 
+Sharper Creative Commons and public-domain replacements are stored locally under `client/public/images`. Product photography is representative, and those product pages are marked accordingly. Creator attribution, sources, licenses, and conversion details are recorded in [client/ASSETS.md](client/ASSETS.md) and the storefront’s `/credits` page. Self-hosted fonts include their SIL Open Font License files.
+
+## Checks
+
+```sh
+cd client
+npm run lint
+npm test
+npm run build
+# With the app running on port 3004:
+npm run check:api
+# Creates and removes an isolated test database on the configured MongoDB cluster:
+npm run check:integration
+```
+
+The HTTP smoke checks read the catalog and verify validation/access control without creating records or initiating payments. The integration checks start a separate app on port 3005 with a uniquely named test database, exercise authenticated customer and admin flows, then remove that test database. They cover account updates, server-priced orders, idempotency, stock restoration, order progression, product archiving, support messages, and newsletter deduplication. Neither suite charges a card. Cloudinary uploads and Stripe test payments can be reviewed separately with deliberate test data.
+
+## Hosting
+
+Set Vercel’s root directory to `client`, select Next.js, and configure the environment variables above in the project. The checked-in `client/vercel.json` specifies the framework and build commands. The app’s frontend and API run together; Render is not part of the app’s request path.
+
+Administrators are existing database users with `role: "admin"`; the signup endpoint never grants administrator access.

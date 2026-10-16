@@ -1,0 +1,114 @@
+{
+  "keyboard": {
+    "title": "File:Beautiful Mechanical Keyboard.jpg",
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7f/Beautiful_Mechanical_Keyboard.jpg/1280px-Beautiful_Mechanical_Keyboard.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Beautiful_Mechanical_Keyboard.jpg",
+    "artist": "Anirban Saha",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "size": [4000, 3000],
+    "path": "/images/keyboard.webp",
+    "dimensions": [1280, 960],
+    "modifications": "Resized and converted to WebP."
+  },
+  "controller": {
+    "title": "File:Playstation DualSense Controller.png",
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/Playstation_DualSense_Controller.png/1280px-Playstation_DualSense_Controller.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Playstation_DualSense_Controller.png",
+    "artist": "Alex Cochrane",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "size": [3120, 2760],
+    "path": "/images/controller.webp",
+    "dimensions": [1280, 1132],
+    "modifications": "Resized and converted to WebP."
+  },
+  "cooler": {
+    "title": "File:Corsair H100i 240mm CPU cooler. On MSI Z590 Torpedo motherboard. (51987363353).jpg",
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/68/Corsair_H100i_240mm_CPU_cooler._On_MSI_Z590_Torpedo_motherboard._%2851987363353%29.jpg/1920px-Corsair_H100i_240mm_CPU_cooler._On_MSI_Z590_Torpedo_motherboard._%2851987363353%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Corsair_H100i_240mm_CPU_cooler._On_MSI_Z590_Torpedo_motherboard._(51987363353).jpg",
+    "artist": "Chi Ho Chan from Hong Kong",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "path": "/images/cooler.webp",
+    "dimensions": [1600, 1200],
+    "modifications": "Resized and converted to WebP."
+  },
+  "chair": {
+    "title": "File:Buerostuhl (fcm).jpg",
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d4/Buerostuhl_%28fcm%29.jpg/1280px-Buerostuhl_%28fcm%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Buerostuhl_(fcm).jpg",
+    "artist": "Photograph:  Frank C. M\u00fcller, Baden-Baden",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "path": "/images/chair.webp",
+    "dimensions": [1067, 1600],
+    "modifications": "Resized and converted to WebP."
+  },
+  "monitor": {
+    "title": "File:Laptop computer monitor (Unsplash).jpg",
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7b/Laptop_computer_monitor_%28Unsplash%29.jpg/1920px-Laptop_computer_monitor_%28Unsplash%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Laptop_computer_monitor_(Unsplash).jpg",
+    "artist": "Taduuda taduuda",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "path": "/images/monitor.webp",
+    "dimensions": [1600, 1067],
+    "modifications": "Resized and converted to WebP."
+  },
+  "duffle": {
+    "title": "File:Leather duffel bag on the ground.jpg",
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/Leather_duffel_bag_on_the_ground.jpg/1920px-Leather_duffel_bag_on_the_ground.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Leather_duffel_bag_on_the_ground.jpg",
+    "artist": "Harsh Jadav",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "path": "/images/duffle.webp",
+    "dimensions": [1600, 1067],
+    "modifications": "Resized and converted to WebP."
+  },
+  "coat": {
+    "title": "File:Photographing coats (Unsplash).jpg",
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3f/Photographing_coats_%28Unsplash%29.jpg/1920px-Photographing_coats_%28Unsplash%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Photographing_coats_(Unsplash).jpg",
+    "artist": "Alex Holyoake stairhopper",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "path": "/images/coat.webp",
+    "dimensions": [1600, 1067],
+    "modifications": "Resized and converted to WebP."
+  },
+  "shelf": {
+    "title": "File:IKEA Billy bookshelf (80x106 cm birch veneer).jpg",
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dd/IKEA_Billy_bookshelf_%2880x106_cm_birch_veneer%29.jpg/1280px-IKEA_Billy_bookshelf_%2880x106_cm_birch_veneer%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:IKEA_Billy_bookshelf_(80x106_cm_birch_veneer).jpg",
+    "artist": "Magnus B\u00e4ck",
+    "license": "Public domain",
+    "licenseUrl": null,
+    "path": "/images/shelf.webp",
+    "dimensions": [1067, 1600],
+    "modifications": "Resized and converted to WebP."
+  },
+  "studio": {
+    "title": "File:Living room (Unsplash).jpg",
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/Living_room_%28Unsplash%29.jpg/1920px-Living_room_%28Unsplash%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Living_room_(Unsplash).jpg",
+    "artist": "Jaros\u0142aw Ceborski jarson",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "path": "/images/studio.webp",
+    "dimensions": [1600, 1068],
+    "modifications": "Resized and converted to WebP."
+  },
+  "playstation": {
+    "title": "File:PlayStation 5 and DualSense with transparent background.png",
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1b/PlayStation_5_and_DualSense_with_transparent_background.png/1920px-PlayStation_5_and_DualSense_with_transparent_background.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:PlayStation_5_and_DualSense_with_transparent_background.png",
+    "artist": "Soberian (this retouched file)Osh33m (original photograph)",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "path": "/images/playstation.webp",
+    "dimensions": [1200, 1600],
+    "modifications": "Resized and converted to WebP."
+  }
+}
